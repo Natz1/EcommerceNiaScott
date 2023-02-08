@@ -1,0 +1,146 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="EcommerceNiaScott.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Castle Home Furnishings</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+        body {
+            background-color: #6f4e37;
+            font-family: Georgia, "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            max-width: 100vw;
+            height: 100px;
+            position: relative;
+            display: flex;
+            background-size: 100% auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .htext {
+            text-align: center;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            color: white;
+            top: 250px;
+            left: 50%;
+        }
+
+        h1 {
+            font-size: 6vw;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top" style="color: #FFFFFF; background-color: #000000; height: 90px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" runat="server" href="~/"><h3>Castle Home Furnishings</h3></a>
+                    <br />
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" style="color: #FFFFFF; background-color: #000000">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/"><h4>Home</h4></a></li>
+                        <li><a runat="server" href="~/About"><h4>About</h4></a></li>
+                        <li><a runat="server" href="~/Contact"><h4>Contact</h4></a></li>
+                        <li><a runat="server" href="~/Products"><h4>Products</h4></a></li>
+                        <!--User Permissions-->
+                        <li id="admin" runat="server"><a runat="server" href="~/FurnitureDatabase"><h4>Inventory</h4></a></li>
+                        <li id="user" runat="server"><a runat="server" href="~/CartDatabase"><h4>Shopping Cart</h4></a></li>
+                        <li id="admin1" runat="server"><a runat="server" href="~/ManageUser"><h4>Users</h4></a></li>
+                        <li id="user1" runat="server"><a runat="server" href="~/OrderHistory"><h4>History</h4></a></li>
+                    </ul>
+
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register"><h4>Register</h4></a></li>
+                                <li><a runat="server" href="~/Account/Login"><h4>Log in</h4></a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account"><h4><%: Context.User.Identity.Name  %></h4> </a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+
+        <section class="hero">
+        <div class="himage">
+            <br /><br /><div class="htext">
+             <h1>Castle Home Furnishings</h1>
+                <br />
+              <p style="font-size:130%">View our collection of products:</p>
+            <asp:Button ID="Button" runat="server" BackColor="#5E1C00" Height="33px" Text="Click Here" Width="90px" OnClick="Button_Click" ForeColor="White" />
+            </div>
+            &nbsp;
+
+            <img class="himage" src="/Images/castleimg.jpg">
+
+        </div>
+        </section>
+
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br />
+
+        <div class="container body-content" style="color: #FFFFFF">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Castle Home Furnishings</p>
+            </footer>
+        </div>
+
+    </form>
+</body>
+</html>
